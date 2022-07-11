@@ -12,6 +12,7 @@ export default {
       if (user) {
         console.log('fb user ==> ', user);
       } else {
+        console.log('fb user not logged in.');
       }
     });
   },

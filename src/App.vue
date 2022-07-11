@@ -18,6 +18,7 @@ export default {
           email: user.email,
         });
       } else {
+        store.setUser(null);
         console.log('fb user not logged in.');
       }
     });

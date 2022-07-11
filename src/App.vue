@@ -1,9 +1,12 @@
 <script>
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { store } from './store';
 
 export default {
   data() {
-    return {};
+    return {
+      store,
+    };
   },
 
   beforeCreate() {
@@ -11,6 +14,10 @@ export default {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         console.log('fb user ==> ', user);
+        store.setUser({
+          displayName: user.displayName,
+          email: user.email,
+        });
       } else {
         console.log('fb user not logged in.');
       }

@@ -16,6 +16,7 @@ export default {
         console.log('fb user ==> ', user);
         store.setUser({
           displayName: user.displayName,
+          photoURL: user.photoURL,
           email: user.email,
         });
       } else {

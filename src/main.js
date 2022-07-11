@@ -35,6 +35,8 @@ const router = createRouter({
   routes: [
     { path: '/', component: Home },
     { path: '/me', component: Me },
+    { path: '/login', component: Login },
+    { path: '/select_country', component: SelectCountry },
   ],
 });
 

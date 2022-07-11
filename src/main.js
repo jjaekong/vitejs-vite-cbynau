@@ -2,10 +2,6 @@ import { createApp } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router';
 import 'bootstrap';
 
-import App from './App.vue';
-import Home from './views/Home.vue';
-import Me from './views/Me.vue';
-
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
@@ -27,6 +23,12 @@ const firebaseConfig = {
 // Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);
 const analytics = getAnalytics(firebaseApp);
+
+import App from './App.vue';
+import Home from './views/Home.vue';
+import Me from './views/Me.vue';
+import Login from './views/Login.vue';
+import SelectCountry from './views/SelectCountry.vue';
 
 const router = createRouter({
   history: createWebHistory(),

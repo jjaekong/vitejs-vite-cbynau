@@ -28,7 +28,7 @@ import App from './App.vue';
 import Home from './views/Home.vue';
 import Me from './views/Me.vue';
 import Login from './views/Login.vue';
-import SelectCountry from './views/SelectCountry.vue';
+import Settings from './views/Settings.vue';
 
 const router = createRouter({
   history: createWebHistory(),
@@ -36,7 +36,7 @@ const router = createRouter({
     { path: '/', component: Home },
     { path: '/me', component: Me },
     { path: '/login', component: Login },
-    { path: '/select_country', component: SelectCountry },
+    { path: '/settings', component: Settings },
   ],
 });
 

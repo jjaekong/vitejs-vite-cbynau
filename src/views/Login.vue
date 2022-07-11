@@ -19,7 +19,7 @@ export default {
 };
 </script>
 <template>
-  <div id="login">
+  <div id="login" role="document">
     <h1>LOGIN</h1>
     <button class="btn" @click="loginWithGoogle">구글로 로그인</button>
   </div>

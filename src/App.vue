@@ -32,4 +32,9 @@ export default {
 
 <style lang="scss">
 @import 'bootstrap/scss/bootstrap';
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+
+[role='document'] {
+  padding: 1rem;
+}
 </style>

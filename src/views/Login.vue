@@ -10,7 +10,9 @@ export default {
       const provider = new GoogleAuthProvider();
       const auth = getAuth();
       signInWithPopup(auth, provider)
-        .then((result) => {})
+        .then((result) => {
+          this.$router.push('/');
+        })
         .catch((error) => {});
     },
   },

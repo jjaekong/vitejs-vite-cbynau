@@ -1,14 +1,21 @@
 <script>
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+
 export default {
-
   data() {
-    return {}
-  }
+    return {};
+  },
 
-  createBefore() {
-
-  }
-}
+  beforeCreate() {
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log('fb user ==> ', user);
+      } else {
+      }
+    });
+  },
+};
 </script>
 
 <template>

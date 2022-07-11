@@ -1,7 +1,6 @@
 <script></script>
 
 <template>
-  TEST
   <router-view />
 </template>
 

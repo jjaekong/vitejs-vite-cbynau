@@ -1,5 +1,7 @@
 import { createApp } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router';
+import 'bootstrap';
+
 import App from './App.vue';
 import Home from './views/Home.vue';
 import Me from './views/Me.vue';

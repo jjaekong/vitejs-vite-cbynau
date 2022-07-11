@@ -4,4 +4,6 @@
   <router-view />
 </template>
 
-<style scoped></style>
+<style lang="scss">
+@import '~bootstrap/scss/bootstrap';
+</style>

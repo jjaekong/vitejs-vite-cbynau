@@ -17,6 +17,17 @@ export default {
       <router-link class="settings" to="/settings"
         ><i class="bi bi-gear"></i
       ></router-link>
+      <div class="dropdown">
+  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+    Dropdown link
+  </a>
+
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    <li><a class="dropdown-item" href="#">Action</a></li>
+    <li><a class="dropdown-item" href="#">Another action</a></li>
+    <li><a class="dropdown-item" href="#">Something else here</a></li>
+  </ul>
+</div>
       <router-link class="avatar" to="/me" v-if="store.user">
         <img :src="store.user.photoURL" :alt="store.user.displayName" />
       </router-link>

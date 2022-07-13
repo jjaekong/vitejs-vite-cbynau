@@ -1,5 +1,6 @@
 <script>
 import { store } from '../store';
+import { getAuth, signOut } from 'firebase/auth';
 
 export default {
   data() {
@@ -7,52 +8,50 @@ export default {
       store,
     };
   },
+  methods: {
+    logout() {
+      const auth = getAuth();
+      signOut(auth)
+        .then(() => {
+          store.setUser(null);
+        })
+        .catch((error) => {});
+    },
+  },
 };
 </script>
 
 <template>
   <div id="home" role="document">
-    <header>
-      <h1 class="logo">LG</h1>
-      <router-link class="settings" to="/settings"
+    <header class="d-flex align-items-center">
+      <h1 class="logo m-0">LG</h1>
+      <router-link class="settings ms-2" to="/settings"
         ><i class="bi bi-gear"></i
       ></router-link>
       <div class="dropdown ms-auto" v-if="store.user">
-        <a href="#" class="avatar" data-bs-toggle="dropdown">
-          <img :src="store.user.photoURL" :alt="store.user.displayName" />
+        <a href="#" class="avatar d-block" data-bs-toggle="dropdown">
+          <img :src="store.user.photoURL" v-if="store.user.photoURL" />
+          <i class="bi bi-person" v-else />
         </a>
-
-        <ul class="dropdown-menu shadow" aria-labelledby="dropdownMenuLink">
+        <ul class="dropdown-menu shadow">
+          <li>{{ store.user.displayName }}</li>
           <li><a class="dropdown-item" href="#">Action</a></li>
-          <li><a class="dropdown-item" href="#">Another action</a></li>
           <li><hr class="dropdown-divider" /></li>
-          <li><a class="dropdown-item" href="#">로그아웃</a></li>
+          <li><a class="dropdown-item" href="#">프로필 수정</a></li>
+          <li><hr class="dropdown-divider" /></li>
+          <li>
+            <a class="dropdown-item" href="#" @click="logout">로그아웃</a>
+          </li>
         </ul>
       </div>
-      <router-link class="avatar" to="/login" v-else>LOGIN</router-link>
+      <router-link class="login ms-auto" to="/login" v-else>LOGIN</router-link>
     </header>
   </div>
 </template>
 
 <style scoped lang="scss">
 #home {
-  padding: 1rem;
   header {
-    display: flex;
-    align-items: center;
-    .logo {
-      margin: 0;
-      font-weight: 600;
-      letter-spacing: -0.1rem;
-    }
-    .country {
-      margin-left: 0.5rem;
-    }
-    .settings {
-      margin-left: 1rem;
-      color: var(--bs-gray-600);
-      font-size: 1.5rem;
-    }
     .avatar {
       margin-left: auto;
       img {

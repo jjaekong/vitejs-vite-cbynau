@@ -34,7 +34,8 @@ export default {
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons.css';
 
-[role='document'] {
-  padding: 1rem;
+body {
+  @extend .p-4;
+  background-color: var(--bs-gray-100);
 }
 </style>

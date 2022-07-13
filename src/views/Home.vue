@@ -56,7 +56,7 @@ export default {
     </header>
   </div>
   <div
-    class="modal modal-sm"
+    class="modal modal-lg"
     id="edit-profile"
     tabindex="-1"
     data-bs-backdrop="static"

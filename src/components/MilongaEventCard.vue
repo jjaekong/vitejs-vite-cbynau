@@ -20,31 +20,33 @@
       </div>
       <div class="col-8">
         <div class="card-body py-0">
-          <span class="badge text-bg-dark">Hong Kong</span>
+          <span class="badge text-bg-dark mb-1">Hong Kong</span>
           <h6 class="card-title">
             La Milonga de Manilla de Tailand de Mundial
           </h6>
-          <dl
-            class="d-flex mb-0"
-            style="font-size: 0.8rem; color: var(--bs-gray-600)"
-          >
-            <dt class="me-2" style="word-break: keep-all">시간</dt>
-            <dd class="mb-0">8 pm ~ 1 am (4 hours)</dd>
-          </dl>
-          <dl
-            class="d-flex mb-0"
-            style="font-size: 0.8rem; color: var(--bs-gray-600)"
-          >
-            <dt class="me-2" style="word-break: keep-all">장소</dt>
-            <dd class="mb-0">오초</dd>
-          </dl>
-          <dl
-            class="d-flex mb-0"
-            style="font-size: 0.7rem; color: var(--bs-gray-600)"
-          >
-            <dt class="me-2" style="word-break: keep-all">DJ</dt>
-            <dd class="mb-0">에피톤</dd>
-          </dl>
+          <div class="mb-2">
+            <dl
+              class="d-flex mb-0"
+              style="font-size: 0.8rem; color: var(--bs-gray-600)"
+            >
+              <dt class="me-2" style="word-break: keep-all">시간</dt>
+              <dd class="mb-0">8 pm ~ 1 am (4 hours)</dd>
+            </dl>
+            <dl
+              class="d-flex mb-0"
+              style="font-size: 0.8rem; color: var(--bs-gray-600)"
+            >
+              <dt class="me-2" style="word-break: keep-all">장소</dt>
+              <dd class="mb-0">오초</dd>
+            </dl>
+            <dl
+              class="d-flex mb-0"
+              style="font-size: 0.7rem; color: var(--bs-gray-600)"
+            >
+              <dt class="me-2" style="word-break: keep-all">DJ</dt>
+              <dd class="mb-0">에피톤</dd>
+            </dl>
+          </div>
         </div>
       </div>
       <div class="col-2">

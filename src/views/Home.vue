@@ -84,14 +84,18 @@ export default {
           <!-- <h6 class="dropdown-header">오거나이저</h6>
           <a class="dropdown-item" href="#">TEST</a>
           <hr class="dropdown-divider" /> -->
-          <a class="dropdown-item" href="#" @click="logout">프로필 설정</a>
+          <a class="dropdown-item" href="#edit-profile" data-bs-toggle="modal"
+            >프로필 설정</a
+          >
           <hr class="dropdown-divider" />
           <a class="dropdown-item text-danger" href="#" @click="logout"
             >로그아웃</a
           >
         </div>
       </div>
-      <router-link class="login ms-auto" to="/login" v-else>LOGIN</router-link>
+      <router-link class="btn btn-light btn-sm login ms-auto" to="/login" v-else
+        >LOGIN</router-link
+      >
     </header>
     <div class="p-3">
       <MilongaEventCard v-for="milongaEvent in milongaEvents" />

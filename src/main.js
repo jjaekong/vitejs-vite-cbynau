@@ -27,14 +27,12 @@ const analytics = getAnalytics(firebaseApp);
 import App from './App.vue';
 import Home from './views/Home.vue';
 import Login from './views/Login.vue';
-import Settings from './views/Settings.vue';
 
 const router = createRouter({
   history: createWebHistory(),
   routes: [
     { path: '/', component: Home },
     { path: '/login', component: Login },
-    { path: '/settings', component: Settings },
   ],
 });
 

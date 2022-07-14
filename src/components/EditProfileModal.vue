@@ -1,5 +1,6 @@
 <script>
 import { store } from '../store';
+import { getAuth, updateProfile } from 'firebase/auth';
 
 export default {
   data() {
@@ -7,22 +8,34 @@ export default {
       store,
       username: null,
       file: null,
-      roles: {
+      role: {
         organizer: false,
       },
     };
   },
-  created() {
-    this.username = store.user.displayName;
-    this.roles.organizer = !store.user.roles
-      ? false
-      : store.user.roles.organizer
-      ? store.user.roles.organizer
-      : false;
+  watch: {
+    'store.user': function () {
+      if (store.user) {
+        this.username = store.user.displayName;
+        this.role.organizer = !store.user.role
+          ? false
+          : !store.user.role.organizer
+          ? false
+          : store.user.role.organizer;
+      }
+    },
   },
+  created() {},
   methods: {
     editProfile() {
       console.log('edit profile');
+      const auth = getAuth();
+      updateProfile(auth.currentUser, {
+        displayName: this.username,
+      }).then(() => {
+        console.log('udpate username');
+        store.setUser({ displayName: this.username });
+      });
     },
   },
 };
@@ -44,7 +57,6 @@ export default {
           ></button>
         </div>
         <div class="modal-body">
-          <div>{{ roles }}</div>
           <form>
             <div class="mb-3 text-center">
               <img class="rounded-circle avatar" :src="store.user.photoURL" />
@@ -70,7 +82,7 @@ export default {
                   type="checkbox"
                   role="switch"
                   id="role-organizer"
-                  v-model="roles.organizer"
+                  v-model="role.organizer"
                 />
                 <label class="form-check-label" for="role-organizer"
                   >오거나이저</label

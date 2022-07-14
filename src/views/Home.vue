@@ -2,10 +2,12 @@
 import { store } from '../store';
 import { getAuth, signOut } from 'firebase/auth';
 import EditProfileModal from '../components/EditProfileModal.vue';
+import GlobalSettingsModal from '../components/GlobalSettingsModal.vue';
 
 export default {
   components: {
     EditProfileModal,
+    GlobalSettingsModal,
   },
   data() {
     return {
@@ -29,9 +31,13 @@ export default {
   <div id="home" role="document">
     <header class="d-flex align-items-center">
       <h1 class="logo m-0">LG</h1>
-      <router-link class="settings ms-2" to="/settings"
+      <a
+        class="settings ms-3 text-dark"
+        href="#global-settings"
+        style="font-size: 1.5rem"
+        data-bs-toggle="modal"
         ><i class="bi bi-gear"></i
-      ></router-link>
+      ></a>
       <div class="dropdown ms-auto" v-if="store.user">
         <a
           href="#"
@@ -48,8 +54,8 @@ export default {
         </a>
         <div class="dropdown-menu shadow">
           <div class="px-3 py-1">
-            <div class="username">악어</div>
-            <div class="email">jjaekong@gmail.com</div>
+            <div class="username">{{ store.user.displayName }}</div>
+            <div class="email">{{ store.user.email }}</div>
           </div>
           <a class="dropdown-item" href="#edit-profile" data-bs-toggle="modal"
             >프로필 수정</a
@@ -69,6 +75,7 @@ export default {
     </header>
   </div>
   <EditProfileModal />
+  <GlobalSettingsModal />
 </template>
 
 <style scoped lang="scss"></style>

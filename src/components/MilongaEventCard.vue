@@ -19,7 +19,7 @@
         </div>
       </div>
       <div class="col-8">
-        <div class="card-body">
+        <div class="card-body py-0">
           <span class="badge text-bg-dark">Hong Kong</span>
           <h6 class="card-title">
             La Milonga de Manilla de Tailand de Mundial

@@ -39,11 +39,11 @@ export default {
 </template>
 
 <style lang="scss">
-$border-radius-sm: 0.25rem;
-$border-radius: 0.5rem;
-$border-radius-lg: 0.75rem;
-$border-radius-xl: 1rem;
-$border-radius-2xl: 2rem;
+// $border-radius-sm: 0.25rem;
+// $border-radius: 0.5rem;
+// $border-radius-lg: 0.75rem;
+// $border-radius-xl: 1rem;
+// $border-radius-2xl: 2rem;
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons.css';
 

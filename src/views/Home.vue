@@ -58,17 +58,34 @@ export default {
         <div class="dropdown-menu shadow">
           <div class="px-3 py-1">
             <div class="username">{{ store.user.displayName }}</div>
-            <div class="email">{{ store.user.email }}</div>
+            <div class="email mb-2">{{ store.user.email }}</div>
+            <!-- <a
+              href="#edit-profile"
+              data-bs-toggle="modal"
+              class="text-muted small"
+              >프로필 설정</a
+            > -->
           </div>
-          <a class="dropdown-item" href="#edit-profile" data-bs-toggle="modal"
-            >프로필 수정</a
-          >
           <hr class="dropdown-divider" />
-          <a class="dropdown-item" href="#">TEST</a>
+          <a class="dropdown-item" href="#"
+            >좋아요한 밀롱가 이벤트
+            <span class="badge text-bg-primary">10</span>
+          </a>
+          <a class="dropdown-item" href="#"
+            >참석한 밀롱가 이벤트
+            <span class="badge text-bg-primary">1</span>
+          </a>
+          <hr class="dropdown-divider" />
+          <h6 class="dropdown-header">오거나이저</h6>
+          <p class="px-3 text-muted small">
+            프로필 설정에서 오거나이저 역할을 선택하면 관련 메뉴가 노출됩니다.
+          </p>
           <hr class="dropdown-divider" />
           <!-- <h6 class="dropdown-header">오거나이저</h6>
           <a class="dropdown-item" href="#">TEST</a>
           <hr class="dropdown-divider" /> -->
+          <a class="dropdown-item" href="#" @click="logout">프로필 설정</a>
+          <hr class="dropdown-divider" />
           <a class="dropdown-item text-danger" href="#" @click="logout"
             >로그아웃</a
           >

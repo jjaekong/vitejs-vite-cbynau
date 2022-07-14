@@ -14,7 +14,33 @@ export default {
   data() {
     return {
       store,
-      milongaEvents: new Array(3),
+      milongaEvents: [
+        {
+          city: '홍대',
+          name: '루미노소',
+          poster: 'https://picsum.photos/200/300',
+        },
+        {
+          city: '부산',
+          name: '땅겐미 정모',
+          poster: 'https://picsum.photos/300/300',
+        },
+        {
+          city: '홍대',
+          name: '그리셀',
+          poster: 'https://picsum.photos/200/400',
+        },
+        {
+          city: '홍대',
+          name: '목뜨라',
+          poster: 'https://picsum.photos/200/300',
+        },
+        {
+          city: '홍대',
+          name: '목루쓰',
+          poster: 'https://picsum.photos/200/300',
+        },
+      ],
     };
   },
   methods: {
@@ -98,7 +124,10 @@ export default {
       >
     </header>
     <div class="p-3">
-      <MilongaEventCard v-for="milongaEvent in milongaEvents" />
+      <MilongaEventCard
+        v-for="milongaEvent in milongaEvents"
+        :milonga="milongaEvent"
+      />
     </div>
   </div>
   <EditProfileModal />

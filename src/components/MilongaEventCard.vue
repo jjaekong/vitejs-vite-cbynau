@@ -1,5 +1,16 @@
+<script>
+export default {
+  props: {
+    milonga: { type: Object, require: true },
+  },
+};
+</script>
+
 <template>
-  <div class="card shadow mb-2 p-2">
+  <router-link
+    to="/milonga/gricel/event/2022-07-18T1900"
+    class="card shadow mb-2 p-2 text-decoration-none text-dark"
+  >
     <div class="row g-0">
       <div class="col-2">
         <div
@@ -20,9 +31,9 @@
       </div>
       <div class="col-8">
         <div class="card-body py-0">
-          <span class="badge text-bg-dark mb-1">Hong Kong</span>
           <h6 class="card-title">
-            La Milonga de Manilla de Tailand de Mundial
+            <span class="badge text-bg-dark">{{ milonga.city }}</span>
+            {{ milonga.name }}
           </h6>
           <div class="mb-2">
             <dl
@@ -50,8 +61,8 @@
         </div>
       </div>
       <div class="col-2">
-        <img class="img-fluid" src="https://picsum.photos/200/300" />
+        <img class="img-fluid" :src="milonga.poster" />
       </div>
     </div>
-  </div>
+  </router-link>
 </template>

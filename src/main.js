@@ -27,11 +27,16 @@ const analytics = getAnalytics(firebaseApp);
 import App from './App.vue';
 import Home from './views/Home.vue';
 import Login from './views/Login.vue';
+import MilongaEvent from './views/MilongaEvent.vue';
 
 const router = createRouter({
   history: createWebHistory(),
   routes: [
     { path: '/', component: Home },
+    {
+      path: '/milonga/:milongaId/event/:milongaEventId',
+      component: MilongaEvent,
+    },
     { path: '/login', component: Login },
   ],
 });

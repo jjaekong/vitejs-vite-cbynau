@@ -21,6 +21,7 @@ export default {
         store.setUser(null);
         console.log('fb user not logged in.');
       }
+      this.$refs['loading'].style.display = 'none';
     });
   },
 };
@@ -28,6 +29,11 @@ export default {
 
 <template>
   <router-view />
+  <div id="loading" ref="loading">
+    <div class="spinner-border text-dark" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
 </template>
 
 <style lang="scss">
@@ -43,5 +49,18 @@ $border-radius-2xl: 2rem;
 body {
   @extend .p-4;
   background-color: var(--bs-gray-200);
+}
+
+#loading {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 9999;
+  background: rgba(#000, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>

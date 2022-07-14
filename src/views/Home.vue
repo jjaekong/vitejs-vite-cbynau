@@ -1,8 +1,12 @@
 <script>
 import { store } from '../store';
 import { getAuth, signOut } from 'firebase/auth';
+import EditProfileModal from '../components/EditProfileModal.vue';
 
 export default {
+  components: {
+    EditProfileModal,
+  },
   data() {
     return {
       store,
@@ -29,8 +33,17 @@ export default {
         ><i class="bi bi-gear"></i
       ></router-link>
       <div class="dropdown ms-auto" v-if="store.user">
-        <a href="#" class="avatar d-block" data-bs-toggle="dropdown">
-          <img :src="store.user.photoURL" v-if="store.user.photoURL" />
+        <a
+          href="#"
+          class="avatar d-block btn btn-dark p-0 rounded-circle"
+          data-bs-toggle="dropdown"
+        >
+          <img
+            :src="store.user.photoURL"
+            v-if="store.user.photoURL"
+            class="rounded-circle"
+            style="width: 2.5rem; height: 2.5rem"
+          />
           <i class="bi bi-person" v-else />
         </a>
         <div class="dropdown-menu shadow">
@@ -55,81 +68,7 @@ export default {
       <router-link class="login ms-auto" to="/login" v-else>LOGIN</router-link>
     </header>
   </div>
-  <div
-    class="modal modal-lg"
-    id="edit-profile"
-    tabindex="-1"
-    data-bs-backdrop="static"
-  >
-    <div
-      class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
-      v-if="store.user"
-    >
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">프로필 수정</h5>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="mb-3 text-center">
-              <img class="rounded-circle avatar" :src="store.user.photoURL" />
-            </div>
-            <div class="mb-3">
-              <label for="photo" class="form-label">사진:</label>
-              <input class="form-control" type="file" id="photo" />
-            </div>
-            <div class="mb-3">
-              <label class="form-label" for="username">이름 또는 닉네임:</label>
-              <input type="text" class="form-control" id="username" />
-            </div>
-            <div class="mb-3">
-              <h6 class="form-label">역할:</h6>
-              <div class="form-check form-switch">
-                <input
-                  class="form-check-input"
-                  type="checkbox"
-                  role="switch"
-                  id="flexSwitchCheckDefault"
-                />
-                <label class="form-check-label" for="flexSwitchCheckDefault"
-                  >오거나이저</label
-                >
-              </div>
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
-          >
-            취소
-          </button>
-          <button type="button" class="btn btn-primary">수정하기</button>
-        </div>
-      </div>
-    </div>
-  </div>
+  <EditProfileModal />
 </template>
 
-<style scoped lang="scss">
-#home {
-  header {
-    .avatar {
-      margin-left: auto;
-      img {
-        width: 2.5rem;
-        height: 2.5rem;
-        border-radius: 50%;
-      }
-    }
-  }
-}
-</style>
+<style scoped lang="scss"></style>

@@ -76,7 +76,7 @@ export default {
       </div>
       <router-link class="login ms-auto" to="/login" v-else>LOGIN</router-link>
     </header>
-    <div class="p-2">
+    <div class="p-3">
       <MilongaEventCard v-for="milongaEvent in milongaEvents" />
     </div>
   </div>

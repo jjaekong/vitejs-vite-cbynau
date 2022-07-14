@@ -33,12 +33,12 @@ export default {
         {
           city: '홍대',
           name: '목뜨라',
-          poster: 'https://picsum.photos/200/300',
+          poster: 'https://picsum.photos/200/350',
         },
         {
           city: '홍대',
           name: '목루쓰',
-          poster: 'https://picsum.photos/200/300',
+          poster: 'https://picsum.photos/250/300',
         },
       ],
     };
@@ -103,9 +103,15 @@ export default {
           </a>
           <hr class="dropdown-divider" />
           <h6 class="dropdown-header">오거나이저</h6>
-          <p class="px-3 text-muted small">
+          <a class="dropdown-item" href="#edit-profile" data-bs-toggle="modal"
+            >내 밀롱가</a
+          >
+          <a class="dropdown-item" href="#edit-profile" data-bs-toggle="modal"
+            >내 밀롱가 이벤트</a
+          >
+          <!-- <p class="px-3 text-muted small">
             프로필 설정에서 오거나이저 역할을 선택하면 관련 메뉴가 노출됩니다.
-          </p>
+          </p> -->
           <hr class="dropdown-divider" />
           <!-- <h6 class="dropdown-header">오거나이저</h6>
           <a class="dropdown-item" href="#">TEST</a>

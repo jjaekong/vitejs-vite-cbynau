@@ -3,15 +3,18 @@ import { store } from '../store';
 import { getAuth, signOut } from 'firebase/auth';
 import EditProfileModal from '../components/EditProfileModal.vue';
 import GlobalSettingsModal from '../components/GlobalSettingsModal.vue';
+import MilongaEventCard from '../components/MilongaEventCard.vue';
 
 export default {
   components: {
     EditProfileModal,
     GlobalSettingsModal,
+    MilongaEventCard,
   },
   data() {
     return {
       store,
+      milongaEvents: new Array(3),
     };
   },
   methods: {
@@ -29,7 +32,7 @@ export default {
 
 <template>
   <div id="home" role="document">
-    <header class="d-flex align-items-center">
+    <header class="d-flex align-items-center px-4 pt-4 pb-2">
       <h1 class="logo m-0">LG</h1>
       <a
         class="settings ms-3 text-dark"
@@ -73,6 +76,9 @@ export default {
       </div>
       <router-link class="login ms-auto" to="/login" v-else>LOGIN</router-link>
     </header>
+    <div class="p-2">
+      <MilongaEventCard v-for="milongaEvent in milongaEvents" />
+    </div>
   </div>
   <EditProfileModal />
   <GlobalSettingsModal />

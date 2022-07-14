@@ -48,8 +48,7 @@ $border-radius-2xl: 2rem;
 @import 'bootstrap-icons/font/bootstrap-icons.css';
 
 body {
-  @extend .p-4;
-  background-color: var(--bs-gray-200);
+  background-color: var(--bs-gray-100);
 }
 
 #loading {

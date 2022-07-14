@@ -4,7 +4,6 @@
     id="global-settings"
     tabindex="-1"
     ref="global-settings"
-    data-bs-backdrop="static"
   >
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
@@ -18,7 +17,16 @@
           ></button>
         </div>
         <div class="modal-body">
-          <p>settings</p>
+          <form>
+            <div class="mb-3">
+              <label for="" class="form-label">국가:</label>
+              <input class="form-control form-control" type="text" id="" />
+            </div>
+            <div class="mb-3">
+              <label for="" class="form-label">언어:</label>
+              <input class="form-control form-control" type="text" id="" />
+            </div>
+          </form>
         </div>
         <div class="modal-footer">
           <button

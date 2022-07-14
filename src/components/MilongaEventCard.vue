@@ -18,31 +18,30 @@
           >
         </div>
       </div>
-      <div class="col-7">
+      <div class="col-8">
         <div class="card-body">
           <span class="badge text-bg-dark">Hong Kong</span>
-          <h6 class="card-title">La Milonga de Manilla</h6>
+          <h6 class="card-title">
+            La Milonga de Manilla de Tailand de Mundial
+          </h6>
           <dl
             class="d-flex mb-0"
             style="font-size: 0.8rem; color: var(--bs-gray-600)"
           >
-            <dt class="me-2">시간</dt>
-            <dd class="mb-0">8 pm to 1 am (4 hours)</dd>
+            <dt class="me-2" style="word-break: keep-all">시간</dt>
+            <dd class="mb-0">8 pm ~ 1 am (4 hours)</dd>
           </dl>
           <dl
             class="d-flex mb-0"
             style="font-size: 0.7rem; color: var(--bs-gray-600)"
           >
-            <dt class="me-2">DJ</dt>
+            <dt class="me-2" style="word-break: keep-all">DJ</dt>
             <dd class="mb-0">에피톤</dd>
           </dl>
         </div>
       </div>
-      <div class="col-3">
-        <img
-          class="img-fluid align-self-center"
-          src="https://picsum.photos/200/300"
-        />
+      <div class="col-2">
+        <img class="img-fluid" src="https://picsum.photos/200/300" />
       </div>
     </div>
   </div>

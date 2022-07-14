@@ -42,7 +42,13 @@ export default {
 </script>
 
 <template>
-  <div class="modal" id="edit-profile" tabindex="-1" data-bs-backdrop="static">
+  <div
+    class="modal fade"
+    id="edit-profile"
+    tabindex="-1"
+    data-bs-backdrop="static"
+    ref="edit-profile"
+  >
     <div
       class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
       v-if="store.user"

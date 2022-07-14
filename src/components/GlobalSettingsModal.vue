@@ -1,6 +1,6 @@
 <template>
   <div
-    class="modal"
+    class="modal fade"
     id="global-settings"
     tabindex="-1"
     ref="global-settings"

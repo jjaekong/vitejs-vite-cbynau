@@ -33,6 +33,13 @@
           </dl>
           <dl
             class="d-flex mb-0"
+            style="font-size: 0.8rem; color: var(--bs-gray-600)"
+          >
+            <dt class="me-2" style="word-break: keep-all">장소</dt>
+            <dd class="mb-0">오초</dd>
+          </dl>
+          <dl
+            class="d-flex mb-0"
             style="font-size: 0.7rem; color: var(--bs-gray-600)"
           >
             <dt class="me-2" style="word-break: keep-all">DJ</dt>

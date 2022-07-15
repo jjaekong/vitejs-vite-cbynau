@@ -9,9 +9,9 @@ export default {
 <template>
   <router-link
     to="/milonga/gricel/event/2022-07-18T1900"
-    class="card shadow mb-2 p-3 text-decoration-none text-dark"
+    class="card shadow mb-2 p-2 text-decoration-none text-dark"
   >
-    <div class="row g-0">
+    <div class="row g-0 flex-nowrap">
       <div class="col-2">
         <div
           class="
@@ -29,13 +29,13 @@ export default {
           >
         </div>
       </div>
-      <div class="col-8">
-        <div class="card-body py-0">
+      <div class="col-auto">
+        <div class="card-body py-1 ps-2">
           <h6 class="card-title">
-            <span class="badge text-bg-dark">{{ milonga.city }}</span>
+            <span class="badge text-bg-primary">{{ milonga.city }}</span>
             {{ milonga.name }}
           </h6>
-          <div class="mb-2">
+          <div>
             <dl
               class="d-flex mb-0"
               style="font-size: 0.8rem; color: var(--bs-gray-600)"
@@ -60,7 +60,7 @@ export default {
           </div>
         </div>
       </div>
-      <div class="col-2">
+      <div class="col-2 ms-auto">
         <img class="img-fluid" :src="milonga.poster" />
       </div>
     </div>

@@ -9,7 +9,7 @@ export default {
 <template>
   <router-link
     to="/milonga/gricel/event/2022-07-18T1900"
-    class="card shadow mb-2 p-2 text-decoration-none text-dark"
+    class="card text-decoration-none text-dark border-0 bg-transparent"
   >
     <div class="row g-0 flex-nowrap">
       <div class="col-2">

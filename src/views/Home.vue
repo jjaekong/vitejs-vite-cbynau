@@ -124,14 +124,15 @@ export default {
       >
     </header>
     <section class="p-3">
-      <header>
-        <h1>오늘</h1>
-        <date>22년 7월 15일</date>
+      <header class="d-flex pb-2 align-items-end border-bottom">
+        <h1 class="mb-0 fw-bold">오늘</h1>
+        <time class="ms-auto" style="font-size: 0.8rem">22년 7월 15일</time>
       </header>
-      <MilongaEventCard
-        v-for="milongaEvent in milongaEvents"
-        :milonga="milongaEvent"
-      />
+      <ul class="list-unstyled mb-0">
+        <li v-for="milongaEvent in milongaEvents" class="border-bottom py-2">
+          <MilongaEventCard :milonga="milongaEvent" />
+        </li>
+      </ul>
     </section>
   </div>
   <EditProfileModal />

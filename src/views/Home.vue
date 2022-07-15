@@ -58,12 +58,15 @@ export default {
 
 <template>
   <div id="home" role="document">
-    <header class="d-flex align-items-center px-4 pt-4 pb-2">
-      <h1 class="logo m-0">LG</h1>
+    <header
+      class="d-flex align-items-center p-2"
+      style="background: var(--bs-gray-300)"
+    >
+      <h1 class="logo m-0" style="font-size: 1.2rem">LG</h1>
       <a
-        class="settings ms-3 text-dark"
+        class="settings ms-2 text-dark"
         href="#global-settings"
-        style="font-size: 1.5rem"
+        style="font-size: 1.2rem"
         data-bs-toggle="modal"
         ><i class="bi bi-gear"></i
       ></a>
@@ -77,7 +80,7 @@ export default {
             :src="store.user.photoURL"
             v-if="store.user.photoURL"
             class="rounded-circle"
-            style="width: 2.5rem; height: 2.5rem"
+            style="width: 2rem; height: 2rem"
           />
           <i class="bi bi-person" v-else />
         </a>
@@ -120,12 +123,16 @@ export default {
         >LOGIN</router-link
       >
     </header>
-    <div class="p-3">
+    <section class="p-3">
+      <header>
+        <h1>오늘</h1>
+        <date>22년 7월 15일</date>
+      </header>
       <MilongaEventCard
         v-for="milongaEvent in milongaEvents"
         :milonga="milongaEvent"
       />
-    </div>
+    </section>
   </div>
   <EditProfileModal />
   <GlobalSettingsModal />

@@ -57,12 +57,12 @@ export default {
 </script>
 
 <template>
-  <div id="home" role="document">
+  <div id="home" role="document" style="padding-top: 4rem">
     <header
-      class="d-flex align-items-center p-2"
-      style="background: var(--bs-gray-300)"
+      class="d-flex align-items-center p-3 position-fixed w-100 top-0"
+      style="background-color: transparent; z-index: 1000; height: 4rem"
     >
-      <h1 class="logo m-0" style="font-size: 1.2rem">LG</h1>
+      <h1 class="logo m-0" style="font-size: 1.2rem">LLGG</h1>
       <a
         class="settings ms-2 text-dark"
         href="#global-settings"
@@ -70,63 +70,100 @@ export default {
         data-bs-toggle="modal"
         ><i class="bi bi-gear"></i
       ></a>
-      <div class="dropdown ms-auto" v-if="store.user">
-        <a
-          href="#"
-          class="avatar d-block btn btn-dark p-0 rounded-circle"
-          data-bs-toggle="dropdown"
-        >
-          <img
-            :src="store.user.photoURL"
-            v-if="store.user.photoURL"
-            class="rounded-circle"
-            style="width: 2rem; height: 2rem"
-          />
-          <i class="bi bi-person" v-else />
-        </a>
-        <div class="dropdown-menu shadow">
-          <div class="px-3 py-1">
-            <div class="username">{{ store.user.displayName }}</div>
-            <div class="email">{{ store.user.email }}</div>
+      <div class="ms-auto d-flex">
+        <div class="dropdown me-2" v-if="store.user">
+          <button
+            type="button"
+            class="
+              avatar
+              d-block
+              btn btn-dark
+              p-0
+              rounded-circle
+              border-0
+              bg-transparent
+              text-dark
+            "
+            data-bs-toggle="dropdown"
+            style="width: 2rem; height: 2rem; font-size: 2rem; line-height: 1"
+          >
+            <i class="bi bi-plus" />
+          </button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#new-milonga" data-bs-toggle="modal"
+              >새로운 밀롱가</a
+            >
+            <a class="dropdown-item" href="#new-milonga" data-bs-toggle="modal"
+              >새로운 밀롱가 이벤트</a
+            >
           </div>
-          <hr class="dropdown-divider" />
-          <a class="dropdown-item" href="#edit-profile" data-bs-toggle="modal"
-            >프로필 설정</a
-          >
-          <hr class="dropdown-divider" />
-          <a class="dropdown-item" href="#"
-            >좋아요한 밀롱가 이벤트
-            <span class="badge text-bg-primary">10</span>
-          </a>
-          <a class="dropdown-item" href="#"
-            >참석한 밀롱가 이벤트
-            <span class="badge text-bg-primary">1</span>
-          </a>
-          <hr class="dropdown-divider" />
-          <h6 class="dropdown-header">오거나이저</h6>
-          <a class="dropdown-item" href="#edit-profile" data-bs-toggle="modal"
-            >내 밀롱가</a
-          >
-          <a class="dropdown-item" href="#edit-profile" data-bs-toggle="modal"
-            >내 밀롱가 이벤트</a
-          >
-          <!-- <p class="px-3 text-muted small">
-            프로필 설정에서 오거나이저 역할을 선택하면 관련 메뉴가 노출됩니다.
-          </p> -->
-          <hr class="dropdown-divider" />
-          <a class="dropdown-item text-danger" href="#" @click="logout"
-            >로그아웃</a
-          >
         </div>
+        <div class="dropdown" v-if="store.user">
+          <button
+            type="button"
+            class="avatar d-block btn btn-dark p-0 rounded-circle"
+            data-bs-toggle="dropdown"
+            style="width: 2rem; height: 2rem"
+          >
+            <img
+              :src="store.user.photoURL"
+              v-if="store.user.photoURL"
+              class="rounded-circle w-100 h-100"
+              style="object-fit: cover"
+            />
+            <i class="bi bi-person" v-else />
+          </button>
+          <div class="dropdown-menu shadow">
+            <div class="px-3 py-1">
+              <div class="username">{{ store.user.displayName }}</div>
+              <div class="email">{{ store.user.email }}</div>
+            </div>
+            <hr class="dropdown-divider" />
+            <a class="dropdown-item" href="#edit-profile" data-bs-toggle="modal"
+              >프로필 설정</a
+            >
+            <hr class="dropdown-divider" />
+            <a class="dropdown-item" href="#"
+              >좋아요한 밀롱가 이벤트
+              <span class="badge text-bg-primary">10</span>
+            </a>
+            <a class="dropdown-item" href="#"
+              >참석한 밀롱가 이벤트
+              <span class="badge text-bg-primary">1</span>
+            </a>
+            <hr class="dropdown-divider" />
+            <h6 class="dropdown-header">오거나이저</h6>
+            <a class="dropdown-item" href="#edit-profile" data-bs-toggle="modal"
+              >내 밀롱가</a
+            >
+            <a class="dropdown-item" href="#edit-profile" data-bs-toggle="modal"
+              >내 밀롱가 이벤트</a
+            >
+            <!-- <p class="px-3 text-muted small">
+              프로필 설정에서 오거나이저 역할을 선택하면 관련 메뉴가 노출됩니다.
+            </p> -->
+            <hr class="dropdown-divider" />
+            <a class="dropdown-item text-danger" href="#" @click="logout"
+              >로그아웃</a
+            >
+          </div>
+        </div>
+        <router-link
+          class="btn btn-light btn-sm login ms-auto"
+          to="/login"
+          v-else
+          >LOGIN</router-link
+        >
       </div>
-      <router-link class="btn btn-light btn-sm login ms-auto" to="/login" v-else
-        >LOGIN</router-link
-      >
     </header>
     <section class="p-3">
       <header class="d-flex pb-2 align-items-end border-bottom">
         <h1 class="mb-0 fw-bold">오늘</h1>
-        <time class="ms-auto" style="font-size: 0.8rem">22년 7월 15일</time>
+        <time
+          class="ms-auto fw-bold"
+          style="font-size: 0.9rem; color: var(--bs-gray-600)"
+          >22년 7월 15일</time
+        >
       </header>
       <ul class="list-unstyled mb-0">
         <li v-for="milongaEvent in milongaEvents" class="border-bottom py-2">
@@ -139,4 +176,8 @@ export default {
   <GlobalSettingsModal />
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+#header {
+  backdrop-filter: blur(10px);
+}
+</style>

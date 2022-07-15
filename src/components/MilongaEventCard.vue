@@ -24,7 +24,7 @@ export default {
           "
         >
           <b style="font-size: 1.2rem">14</b>
-          <small style="font-size: 0.7rem; color: var(--bs-gray-600)"
+          <small style="font-size: 0.8rem; color: var(--bs-gray-600)"
             >목요일</small
           >
         </div>

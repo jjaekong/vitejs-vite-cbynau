@@ -4,12 +4,16 @@ import { getAuth, signOut } from 'firebase/auth';
 import EditProfileModal from '../components/EditProfileModal.vue';
 import GlobalSettingsModal from '../components/GlobalSettingsModal.vue';
 import MilongaEventCard from '../components/MilongaEventCard.vue';
+import NewMilongaModal from '../components/NewMilongaModal.vue';
+import NewMilongaEventModal from '../components/NewMilongaEventModal.vue';
 
 export default {
   components: {
     EditProfileModal,
     GlobalSettingsModal,
     MilongaEventCard,
+    NewMilongaModal,
+    NewMilongaEventModal,
   },
   data() {
     return {
@@ -43,6 +47,9 @@ export default {
       ],
     };
   },
+  beforeCreate() {
+    console.log();
+  },
   methods: {
     logout() {
       const auth = getAuth();
@@ -59,8 +66,9 @@ export default {
 <template>
   <div id="home" role="document" style="padding-top: 4rem">
     <header
+      id="toolbar"
       class="d-flex align-items-center p-3 position-fixed w-100 top-0"
-      style="background-color: transparent; z-index: 1000; height: 4rem"
+      style="z-index: 1000; height: 4rem"
     >
       <h1 class="logo m-0" style="font-size: 1.2rem">LLGG</h1>
       <a
@@ -93,7 +101,10 @@ export default {
             <a class="dropdown-item" href="#new-milonga" data-bs-toggle="modal"
               >새로운 밀롱가</a
             >
-            <a class="dropdown-item" href="#new-milonga" data-bs-toggle="modal"
+            <a
+              class="dropdown-item"
+              href="#new-milonga-event"
+              data-bs-toggle="modal"
               >새로운 밀롱가 이벤트</a
             >
           </div>
@@ -101,7 +112,7 @@ export default {
         <div class="dropdown" v-if="store.user">
           <button
             type="button"
-            class="avatar d-block btn btn-dark p-0 rounded-circle"
+            class="avatar d-block btn btn-dark p-0 rounded-circle border-0"
             data-bs-toggle="dropdown"
             style="width: 2rem; height: 2rem"
           >
@@ -174,10 +185,15 @@ export default {
   </div>
   <EditProfileModal />
   <GlobalSettingsModal />
+  <NewMilongaModal />
+  <NewMilongaEventModal />
 </template>
 
 <style scoped lang="scss">
-#header {
+#toolbar {
   backdrop-filter: blur(10px);
+  @supports not (backdrop-filter: blur(10px)) {
+    background-color: rgba(255, 255, 255, 0.75);
+  }
 }
 </style>

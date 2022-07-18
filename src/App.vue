@@ -1,6 +1,6 @@
 <script>
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { doc, setDoc } from 'firebase/firestore';
+import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import { store } from './store';
 
 export default {
@@ -10,7 +10,7 @@ export default {
 
   beforeCreate() {
     const auth = getAuth();
-    onAuthStateChanged(auth, (user) => {
+    onAuthStateChanged(auth, async (user) => {
       if (user) {
         console.log('fb user ==>', user);
         store.setUser({
@@ -20,7 +20,15 @@ export default {
           emailVarified: user.emailVarified,
           uid: user.uid,
         });
-        // users에 사용자가 있다면 ? 내용을 가져와서 store에 입력
+        // [TODO] users에 사용자가 있다면 ? 내용을 가져와서 store에 입력
+        const db = getFirestore();
+        const userRef = doc(db, 'users', user.uid);
+        const userSnap = await getDoc(userRef);
+        // console.log('userSnap == ', userSnap);
+        if (userSnap.exists()) {
+          const userData = userSnap.data();
+          store.setUser(userData);
+        }
       } else {
         store.setUser(null);
       }

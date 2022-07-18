@@ -1,6 +1,8 @@
 <script>
 import { store } from '../store';
 import { getAuth, signOut } from 'firebase/auth';
+import { Modal } from 'bootstrap';
+
 import EditProfileModal from '../components/EditProfileModal.vue';
 import GlobalSettingsModal from '../components/GlobalSettingsModal.vue';
 import MilongaEventCard from '../components/MilongaEventCard.vue';
@@ -46,9 +48,6 @@ export default {
         },
       ],
     };
-  },
-  beforeCreate() {
-    console.log();
   },
   methods: {
     logout() {
@@ -183,6 +182,7 @@ export default {
         </li>
       </ul>
     </section>
+    <div>store.user => {{ store.user }}</div>
   </div>
   <EditProfileModal />
   <GlobalSettingsModal />

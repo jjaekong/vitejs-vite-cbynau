@@ -1,7 +1,10 @@
 <script>
+import { store } from '../store';
+
 export default {
   data() {
     return {
+      store,
       logo: null,
       name: null,
       id: null,
@@ -10,8 +13,9 @@ export default {
   },
 };
 </script>
+
 <template>
-  <div class="modal fade" id="new-milonga" tabindex="-1">
+  <div class="modal fade" id="new-milonga" tabindex="-1" v-if="store.user">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">

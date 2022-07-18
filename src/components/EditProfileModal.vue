@@ -8,24 +8,31 @@ export default {
       store,
       username: null,
       file: null,
-      role: {
-        organizer: false,
-      },
+      isOrganizer: false,
     };
   },
   watch: {
     'store.user': function () {
-      if (store.user) {
+      if (this.store.user) {
         this.username = store.user.displayName;
-        this.role.organizer = !store.user.role
+        this.isOrganizer = !store.user.role
           ? false
-          : !store.user.role.organizer
+          : !store.user.role.isOrganizer
           ? false
-          : store.user.role.organizer;
+          : store.user.role.isOrganizer;
       }
     },
   },
-  created() {},
+  created() {
+    if (this.store.user) {
+      this.username = store.user.displayName;
+      this.isOrganizer = !store.user.role
+        ? false
+        : !store.user.role.isOrganizer
+        ? false
+        : store.user.role.isOrganizer;
+    }
+  },
   methods: {
     editProfile() {
       console.log('edit profile');
@@ -48,11 +55,9 @@ export default {
     tabindex="-1"
     data-bs-backdrop="static"
     ref="edit-profile"
+    v-if="store.user"
   >
-    <div
-      class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
-      v-if="store.user"
-    >
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">프로필 수정</h5>
@@ -91,7 +96,7 @@ export default {
                   type="checkbox"
                   role="switch"
                   id="role-organizer"
-                  v-model="role.organizer"
+                  v-model="isOrganizer"
                 />
                 <label class="form-check-label" for="role-organizer"
                   >오거나이저</label

@@ -121,6 +121,7 @@ export default {
               v-if="store.user.photoURL"
               class="rounded-circle w-100 h-100"
               style="object-fit: cover"
+              loading="lazy"
             />
             <i class="bi bi-person" v-else />
           </button>

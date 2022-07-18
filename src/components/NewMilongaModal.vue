@@ -33,7 +33,7 @@ export default {
               <input class="form-control form-control" type="file" id="logo" />
             </div>
             <div class="mb-3">
-              <label class="form-label" for="name">이름:</label>
+              <label class="form-label" for="name">밀롱가 이름:</label>
               <input
                 type="text"
                 class="form-control form-control"
@@ -42,7 +42,7 @@ export default {
               />
             </div>
             <div class="mb-3">
-              <label class="form-label" for="id">아이디:</label>
+              <label class="form-label" for="id">밀롱가 아이디:</label>
               <input
                 type="text"
                 class="form-control form-control"
@@ -51,7 +51,7 @@ export default {
               />
             </div>
             <div class="mb-3">
-              <label class="form-label" for="description">소개:</label>
+              <label class="form-label" for="description">밀롱가 소개:</label>
               <input
                 type="text"
                 class="form-control form-control"

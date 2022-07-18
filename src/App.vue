@@ -20,6 +20,7 @@ export default {
           emailVarified: user.emailVarified,
           uid: user.uid,
         });
+        // users에 사용자가 있다면 ? 내용을 가져와서 store에 입력
       } else {
         store.setUser(null);
       }

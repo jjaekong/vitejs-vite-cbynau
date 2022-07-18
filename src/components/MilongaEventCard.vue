@@ -61,7 +61,7 @@ export default {
         </div>
       </div>
       <div class="col-2 ms-auto">
-        <img class="img-fluid" :src="milonga.poster" />
+        <img class="img-fluid" :src="milonga.poster" loading="lazy" />
       </div>
     </div>
   </router-link>

@@ -192,7 +192,9 @@ export default {
 <style scoped lang="scss">
 #toolbar {
   backdrop-filter: blur(10px);
-  @supports not (backdrop-filter: blur(10px)) {
+}
+@supports not (backdrop-filter: blur(10px)) {
+  #toolbar {
     background-color: rgba(255, 255, 255, 0.75);
   }
 }

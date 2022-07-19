@@ -11,29 +11,36 @@ export default {
       isOrganizer: false,
     };
   },
+  computed: {
+    user: () => store.user,
+  },
   watch: {
-    'store.user': function () {
-      if (this.store.user) {
-        this.username = store.user.displayName;
-        this.isOrganizer = !store.user.role
-          ? false
-          : !store.user.role.isOrganizer
-          ? false
-          : store.user.role.isOrganizer;
-      }
+    user: function () {
+      this.fetchUserData();
+    },
+    'user.role': function () {
+      this.fetchUserRoleData();
     },
   },
   created() {
-    if (this.store.user) {
-      this.username = store.user.displayName;
-      this.isOrganizer = !store.user.role
-        ? false
-        : !store.user.role.isOrganizer
-        ? false
-        : store.user.role.isOrganizer;
-    }
+    this.fetchUserData();
+    this.fetchUserRoleData();
   },
   methods: {
+    fetchUserData() {
+      if (this.user) {
+        this.username = this.user.displayName;
+      }
+    },
+    fetchUserRoleData() {
+      if (this.user) {
+        if (this.user.role) {
+          this.isOrganizer = this.user.role.isOrganizer;
+        } else {
+          this.isOrganizer = false;
+        }
+      }
+    },
     editProfile() {
       console.log('edit profile');
       const auth = getAuth();

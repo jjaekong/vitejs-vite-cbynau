@@ -49,6 +49,9 @@ export default {
       ],
     };
   },
+  computed: {
+    user: () => store.user,
+  },
   methods: {
     logout() {
       const auth = getAuth();
@@ -78,7 +81,7 @@ export default {
         ><i class="bi bi-gear"></i
       ></a>
       <div class="ms-auto d-flex">
-        <div class="dropdown me-2" v-if="store.user">
+        <div class="dropdown me-2" v-if="user">
           <button
             type="button"
             class="
@@ -108,7 +111,7 @@ export default {
             >
           </div>
         </div>
-        <div class="dropdown" v-if="store.user">
+        <div class="dropdown" v-if="user">
           <button
             type="button"
             class="avatar d-block btn btn-dark p-0 rounded-circle border-0"
@@ -116,8 +119,8 @@ export default {
             style="width: 2rem; height: 2rem"
           >
             <img
-              :src="store.user.photoURL"
-              v-if="store.user.photoURL"
+              :src="user.photoURL"
+              v-if="user.photoURL"
               class="rounded-circle w-100 h-100"
               style="object-fit: cover"
               loading="lazy"
@@ -126,8 +129,8 @@ export default {
           </button>
           <div class="dropdown-menu shadow">
             <div class="px-3 py-1">
-              <div class="username">{{ store.user.displayName }}</div>
-              <div class="email">{{ store.user.email }}</div>
+              <div class="username">{{ user.displayName }}</div>
+              <div class="email">{{ user.email }}</div>
             </div>
             <hr class="dropdown-divider" />
             <a class="dropdown-item" href="#edit-profile" data-bs-toggle="modal"
@@ -182,7 +185,7 @@ export default {
         </li>
       </ul>
     </section>
-    <div>store.user => {{ store.user }}</div>
+    <div>user => {{ user }}</div>
   </div>
   <EditProfileModal />
   <GlobalSettingsModal />

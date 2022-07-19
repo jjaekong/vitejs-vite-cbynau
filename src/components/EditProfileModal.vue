@@ -1,12 +1,13 @@
 <script>
 import { store } from '../store';
 import { getAuth, updateProfile } from 'firebase/auth';
+import 'dayjs';
 
 export default {
   data() {
     return {
       store,
-      username: null,
+      displayName: null,
       file: null,
       isOrganizer: false,
     };
@@ -29,7 +30,7 @@ export default {
   methods: {
     fetchUserData() {
       if (this.user) {
-        this.username = this.user.displayName;
+        this.displayName = this.user.displayName;
       }
     },
     fetchUserRoleData() {
@@ -42,13 +43,11 @@ export default {
       }
     },
     editProfile() {
-      console.log('edit profile');
       const auth = getAuth();
       updateProfile(auth.currentUser, {
-        displayName: this.username,
+        displayName: this.displayName,
       }).then(() => {
-        console.log('udpate username');
-        store.setUser({ displayName: this.username });
+        store.setUser({ displayName: this.displayName });
       });
     },
   },
@@ -62,7 +61,7 @@ export default {
     tabindex="-1"
     data-bs-backdrop="static"
     ref="edit-profile"
-    v-if="store.user"
+    v-if="user"
   >
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
@@ -77,19 +76,21 @@ export default {
         <div class="modal-body">
           <form>
             <div class="mb-3 text-center">
-              <img class="rounded-circle avatar" :src="store.user.photoURL" />
+              <img class="rounded-circle avatar" :src="user.photoURL" />
             </div>
             <div class="mb-3">
               <label for="photo" class="form-label">사진:</label>
               <input class="form-control form-control" type="file" id="photo" />
             </div>
             <div class="mb-3">
-              <label class="form-label" for="username">이름 또는 닉네임:</label>
+              <label class="form-label" for="displayName"
+                >이름 또는 닉네임:</label
+              >
               <input
                 type="text"
                 class="form-control form-control"
-                id="username"
-                v-model="username"
+                id="displayName"
+                v-model="displayName"
               />
               <div class="form-text">
                 이름(닉네임)은 오직 한 번 만 수정할 수 있습니다.

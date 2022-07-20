@@ -18,32 +18,50 @@ export default {
           // [TODO] users에 doc이 있는가? 페이지 이동 : doc 생성 후 페이지 이동
           if (result.user) {
             const db = getFirestore();
-            const userRef = doc(db, 'users', result.user.uid);
+            const userRef = doc(
+              db,
+              import.meta.env.PROD ? 'users' : 'dev_users',
+              result.user.uid
+            );
             const userSnap = await getDoc(userRef);
             if (userSnap.exists()) {
               this.$router.push('/');
             } else {
+              // const userRoleData = {
+              //   isOrganizer: false,
+              //   orgernizerUpdatedDate: null,
+              //   isDJ: false,
+              //   djUpdatedDate: null,
+              //   isDancer: false,
+              //   dancerUpdatedDate: null,
+              //   isInstructor: false,
+              //   instructorChangeDate: null,
+              // };
               const userRoleData = {
-                isOrganizer: false,
-                orgernizerChangeDate: null,
-                isDJ: false,
-                djChangeDate: null,
-                isDancer: false,
-                dancerChangeDate: null,
-                isInstructor: false,
-                instructorChangeDate: null,
+                organizer: {
+                  is: false,
+                  updatedAt: null,
+                },
+                dj: {
+                  is: false,
+                  updatedAt: null,
+                },
+                instructor: {
+                  is: false,
+                  updatedAt: null,
+                },
               };
               setDoc(
                 userRef,
                 {
-                  nameChangeDate: null,
+                  nameUpdatedAt: null,
                   role: userRoleData,
                 },
                 { merge: true }
               )
                 .then(() => {
                   store.setUser({
-                    nameChangeDate: null,
+                    nameUpdatedAt: null,
                     role: userRoleData,
                   });
                   this.$router.push('/');

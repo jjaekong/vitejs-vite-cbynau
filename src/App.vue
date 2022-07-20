@@ -9,20 +9,26 @@ export default {
   },
 
   beforeCreate() {
+    console.log('import.meta.env.PROD ==> ', import.meta.env.PROD);
     const auth = getAuth();
     onAuthStateChanged(auth, async (user) => {
       if (user) {
-        console.log('fb user ==>', user);
+        console.log('firebase auth user ==>', user);
         store.setUser({
           displayName: user.displayName,
           photoURL: user.photoURL,
           email: user.email,
-          emailVarified: user.emailVarified,
+          emailVerified: user.emailVerified,
           uid: user.uid,
+          isAnonymous: user.isAnonymous,
         });
         // [TODO] users에 사용자가 있다면 ? 내용을 가져와서 store에 입력
         const db = getFirestore();
-        const userRef = doc(db, 'users', user.uid);
+        const userRef = doc(
+          db,
+          import.meta.env.PROD ? 'users' : 'dev_users',
+          user.uid
+        );
         const userSnap = await getDoc(userRef);
         // console.log('userSnap == ', userSnap);
         if (userSnap.exists()) {

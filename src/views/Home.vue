@@ -99,7 +99,7 @@ export default {
           >
             <i class="bi bi-plus" />
           </button>
-          <div class="dropdown-menu" style="font-size: 0.8rem">
+          <div class="dropdown-menu shadow" style="font-size: 0.85rem">
             <a class="dropdown-item" href="#new-milonga" data-bs-toggle="modal"
               >새로운 밀롱가</a
             >
@@ -127,7 +127,7 @@ export default {
             />
             <i class="bi bi-person" v-else />
           </button>
-          <div class="dropdown-menu shadow">
+          <div class="dropdown-menu shadow" style="font-size: 0.85rem">
             <div class="px-3 py-1">
               <div class="username">{{ user.displayName }}</div>
               <div class="email">{{ user.email }}</div>
@@ -146,7 +146,9 @@ export default {
               <span class="badge text-bg-primary">1</span>
             </a>
             <hr class="dropdown-divider" />
-            <h6 class="dropdown-header">오거나이저</h6>
+            <h6 class="dropdown-header" style="font-size: 0.75rem">
+              오거나이저
+            </h6>
             <a class="dropdown-item" href="#edit-profile" data-bs-toggle="modal"
               >내 밀롱가</a
             >

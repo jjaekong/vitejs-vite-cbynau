@@ -1,7 +1,7 @@
 <script>
 import { store } from '../store';
 import { getAuth, updateProfile } from 'firebase/auth';
-import { doc, setDoc, Timestamp } from 'firebase/firestore';
+import { getFirestore, doc, setDoc, Timestamp } from 'firebase/firestore';
 import dayjs from 'dayjs';
 
 export default {
@@ -12,8 +12,8 @@ export default {
       displayName: null,
       file: null,
       isOrganizer: false,
-      canUpdateName: null,
-      canUpdateRoleOrganizer: null,
+      canUpdateName: false,
+      canUpdateOrg: null,
     };
   },
   computed: {
@@ -21,37 +21,25 @@ export default {
   },
   watch: {
     user: function () {
-      console.log('watch user data: ', this.user);
       this.fetchUserData();
-    },
-    'user.role': function () {
-      this.fetchUserRoleData();
     },
   },
   created() {
     this.fetchUserData();
-    this.fetchUserRoleData();
   },
   methods: {
     fetchUserData() {
-      if (this.user) {
-        console.log('fetch user data: ', this.user);
-        this.displayName = this.user.displayName;
-        this.canUpdateName = () => {
-          return this.user.nameUpdatedAt === null ? true : false;
-        };
-      }
-    },
-    fetchUserRoleData() {
-      if (this.user) {
-        if (this.user.role) {
-          this.isOrganizer = this.user.role.isOrganizer;
-          this.canUpdateRoleOrganizer =
-            this.user.role.organizer.updatedAt === null ? true : false;
-        } else {
-          this.isOrganizer = false;
-        }
-      }
+      this.displayName = !this.user ? null : this.user.displayName;
+      this.canUpdateName = !this.user
+        ? false
+        : this.user.nameUpdatedAt !== null
+        ? false
+        : true;
+      this.canUpdateOrg = !this.user
+        ? false
+        : this.user.orgUpdatedAt !== null
+        ? false
+        : true;
     },
     editProfile() {
       const auth = getAuth();
@@ -70,9 +58,13 @@ export default {
           })
             .then(() => {
               const nameUpdatedAt = Timestamp.now();
-              setDoc(userRef, {
-                nameUpdatedAt: nameUpdatedAt,
-              }).then(() => {
+              setDoc(
+                userRef,
+                {
+                  nameUpdatedAt: nameUpdatedAt,
+                },
+                { merge: true }
+              ).then(() => {
                 store.setUser({ nameUpdatedAt: nameUpdatedAt });
               });
             })
@@ -81,12 +73,14 @@ export default {
       }
 
       // 오거나이저 업데이트
-      setDoc(userRef, {
-        role: {
-          isOrganizer: this.isOrganizer,
-          organizerChangeDate: new Date(),
-        },
-      });
+      if (canUpdateOrg) {
+        if (this.isOrganizer !== this.user.isOrganizer) {
+          setDoc(userRef, {
+            isOrganizer: this.isOrganizer,
+            orgUpdatedAt: Timestamp.now(),
+          });
+        }
+      }
     },
     uploadPhoto() {
       console.log('upload photo');
@@ -133,13 +127,19 @@ export default {
               <label class="form-label" for="displayName"
                 >이름 또는 닉네임:</label
               >
-              <input
-                type="text"
-                class="form-control form-control"
-                id="displayName"
-                v-model="displayName"
-                :disabled="canUpdateName === false"
-              />
+              <div class="input-group">
+                <input
+                  type="text"
+                  class="form-control form-control"
+                  id="displayName"
+                  v-model="displayName"
+                  :disabled="canUpdateName === false"
+                  required
+                />
+                <button type="button" class="btn btn-outline-secondary">
+                  변경
+                </button>
+              </div>
               <div
                 class="form-text text-danger"
                 v-show="canUpdateName === false"
@@ -164,7 +164,7 @@ export default {
                   role="switch"
                   id="role-organizer"
                   v-model="isOrganizer"
-                  :disabled="canUpdateRoleOrganizer === false"
+                  :disabled="canUpdateOrg === false"
                 />
                 <label class="form-check-label" for="role-organizer"
                   >오거나이저</label
@@ -172,7 +172,7 @@ export default {
               </div>
               <div
                 class="form-text text-danger"
-                v-show="canUpdateRoleOrganizer === false"
+                v-show="canUpdateOrg === false"
               >
                 오거나이저 역할을 변경할 수 없습니다.
               </div>
@@ -183,7 +183,7 @@ export default {
             </div>
           </form>
         </div>
-        <div class="modal-footer">
+        <!-- <div class="modal-footer">
           <button
             type="button"
             class="btn btn-secondary"
@@ -194,7 +194,7 @@ export default {
           <button type="button" class="btn btn-primary" @click="editProfile">
             수정하기
           </button>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>

@@ -99,7 +99,7 @@ export default {
           >
             <i class="bi bi-plus" />
           </button>
-          <div class="dropdown-menu">
+          <div class="dropdown-menu" style="font-size: 0.8rem">
             <a class="dropdown-item" href="#new-milonga" data-bs-toggle="modal"
               >새로운 밀롱가</a
             >

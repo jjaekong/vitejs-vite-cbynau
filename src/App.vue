@@ -5,7 +5,9 @@ import { store } from './store';
 
 export default {
   data() {
-    return { store };
+    return { store 
+    isPROD: import.meta.env.PROD
+    };
   },
 
   beforeCreate() {
@@ -45,6 +47,7 @@ export default {
 </script>
 
 <template>
+<div class="position-fixed bg-danger text-white" style="top:0;left:0;z-index:9999" v-show="!isPROD">!PROD</div>
   <router-view />
   <div id="loading" ref="loading">
     <div class="spinner-border text-dark" role="status">

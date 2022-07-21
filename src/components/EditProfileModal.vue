@@ -1,7 +1,7 @@
 <script>
 import { store } from '../store';
 import { getAuth, updateProfile } from 'firebase/auth';
-import { getFirestore, doc, setDoc, Timestamp } from 'firebase/firestore';
+import { getFirestore, doc, setDoc } from 'firebase/firestore';
 import dayjs from 'dayjs';
 
 export default {
@@ -31,6 +31,11 @@ export default {
   created() {
     this.fetchUserData();
   },
+  mounted() {
+    this.$refs['edit-profile'].addEventListener('hidden.bs.modal', () => {
+      this.resetValidData();
+    });
+  },
   methods: {
     fetchUserData() {
       this.name = !this.user ? null : this.user.displayName;
@@ -51,8 +56,20 @@ export default {
     updateName() {
       if (this.name) {
         if (this.name !== this.user.displayName) {
-          this.updateNameValid = true;
-          this.updateNameFeedback = '이름(닉네임)이 변경되었습니다.';
+          const auth = getAuth();
+          updateProfile(auth.currentUser, {
+            displayName: this.name,
+          })
+            .then(() => {
+              this.updateNameValid = true;
+              this.updateNameFeedback = '이름(닉네임)이 변경되었습니다.';
+              this.store.setUser({ displayName: this.name });
+            })
+            .catch((error) => {
+              this.updateNameValid = false;
+              this.updateNameFeedback =
+                '이름(닉네임)을 변경하는데 오류가 발생했습니다.';
+            });
         } else {
           this.updateNameValid = false;
           this.updateNameFeedback = '기존 이름(닉네임)과 동일합니다.';
@@ -68,6 +85,15 @@ export default {
         this.isOrganizer ? '' : '비'
       }활성화했습니다.`;
     },
+    resetValidData() {
+      console.log('resetValidData');
+      this.uploadPhotoValid = null;
+      this.uploadPhotoFeedback = null;
+      this.updateNameValid = null;
+      this.updateNameFeedback = null;
+      this.updateOrgValid = null;
+      this.updateOrgFeedback = null;
+    },
   },
 };
 </script>
@@ -79,10 +105,9 @@ export default {
     tabindex="-1"
     data-bs-backdrop="static"
     ref="edit-profile"
-    v-if="user"
   >
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-      <div class="modal-content">
+      <div class="modal-content" v-if="user">
         <div class="modal-header">
           <h5 class="modal-title">프로필 수정</h5>
           <button
@@ -94,7 +119,7 @@ export default {
         <div class="modal-body">
           <form>
             <div class="mb-3 text-center">
-              <img class="rounded-circle avatar" :src="user.photo" />
+              <img class="rounded-circle avatar" :src="user.photoURL" />
             </div>
             <div class="mb-3">
               <label for="photo" class="form-label">사진:</label>

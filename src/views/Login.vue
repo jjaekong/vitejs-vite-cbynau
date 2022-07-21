@@ -24,7 +24,6 @@ export default {
               result.user.uid
             );
             const userSnap = await getDoc(userRef);
-            console.log('userSnap.metadata => ', userSnap.metadata);
             if (userSnap.exists()) {
               this.$router.push('/');
             } else {

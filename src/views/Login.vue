@@ -24,46 +24,19 @@ export default {
               result.user.uid
             );
             const userSnap = await getDoc(userRef);
+            console.log('userSnap.metadata => ', userSnap.metadata);
             if (userSnap.exists()) {
               this.$router.push('/');
             } else {
-              // const userRoleData = {
-              //   isOrganizer: false,
-              //   orgernizerUpdatedDate: null,
-              //   isDJ: false,
-              //   djUpdatedDate: null,
-              //   isDancer: false,
-              //   dancerUpdatedDate: null,
-              //   isInstructor: false,
-              //   instructorChangeDate: null,
-              // };
               const userRoleData = {
-                organizer: {
-                  is: false,
-                  updatedAt: null,
-                },
-                dj: {
-                  is: false,
-                  updatedAt: null,
-                },
-                instructor: {
-                  is: false,
-                  updatedAt: null,
-                },
+                isOrganizer: false,
+                isDJ: false,
+                isDancer: false,
+                isInstructor: false,
               };
-              setDoc(
-                userRef,
-                {
-                  nameUpdatedAt: null,
-                  role: userRoleData,
-                },
-                { merge: true }
-              )
+              setDoc(userRef, { ...userRoleData }, { merge: true })
                 .then(() => {
-                  store.setUser({
-                    nameUpdatedAt: null,
-                    role: userRoleData,
-                  });
+                  store.setUser({ ...userRoleData });
                   this.$router.push('/');
                 })
                 .catch((error) => {});

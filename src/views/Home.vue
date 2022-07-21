@@ -99,7 +99,7 @@ export default {
           >
             <i class="bi bi-plus" />
           </button>
-          <div class="dropdown-menu shadow" style="font-size: 0.85rem">
+          <div class="dropdown-menu shadow">
             <a class="dropdown-item" href="#new-milonga" data-bs-toggle="modal"
               >새로운 밀롱가</a
             >
@@ -127,7 +127,7 @@ export default {
             />
             <i class="bi bi-person" v-else />
           </button>
-          <div class="dropdown-menu shadow" style="font-size: 0.85rem">
+          <div class="dropdown-menu shadow">
             <div class="px-3 py-1">
               <div class="username">{{ user.displayName }}</div>
               <div class="email">{{ user.email }}</div>

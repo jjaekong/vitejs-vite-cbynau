@@ -8,12 +8,16 @@ export default {
   data() {
     return {
       store,
-      photoURL: null,
-      displayName: null,
+      photo: null,
+      name: null,
       file: null,
       isOrganizer: false,
-      canUpdateName: false,
-      canUpdateOrg: null,
+      uploadPhotoValid: null,
+      uploadPhotoFeedback: null,
+      updateNameValid: null,
+      updateNameFeedback: null,
+      updateOrgValid: null,
+      updateOrgFeedback: null,
     };
   },
   computed: {
@@ -29,61 +33,40 @@ export default {
   },
   methods: {
     fetchUserData() {
-      this.displayName = !this.user ? null : this.user.displayName;
-      this.canUpdateName = !this.user
-        ? false
-        : this.user.nameUpdatedAt !== null
-        ? false
-        : true;
-      this.canUpdateOrg = !this.user
-        ? false
-        : this.user.orgUpdatedAt !== null
-        ? false
-        : true;
+      this.name = !this.user ? null : this.user.displayName;
+      this.isOrganizer = !this.user ? null : this.user.isOrganizer;
     },
     editProfile() {
-      const auth = getAuth();
-      const db = getFirestore();
-      const userRef = doc(
-        db,
-        import.meta.env.PROD ? 'users' : 'dev_users',
-        this.user.uid
-      );
-
-      // 이름 업데이트
-      if (this.canUpdateName) {
-        if (this.displayName !== this.user.displayName) {
-          updateProfile(auth.currentUser, {
-            displayName: this.displayName,
-          })
-            .then(() => {
-              const nameUpdatedAt = Timestamp.now();
-              setDoc(
-                userRef,
-                {
-                  nameUpdatedAt: nameUpdatedAt,
-                },
-                { merge: true }
-              ).then(() => {
-                store.setUser({ nameUpdatedAt: nameUpdatedAt });
-              });
-            })
-            .catch(() => {});
-        }
-      }
-
-      // 오거나이저 업데이트
-      if (canUpdateOrg) {
-        if (this.isOrganizer !== this.user.isOrganizer) {
-          setDoc(userRef, {
-            isOrganizer: this.isOrganizer,
-            orgUpdatedAt: Timestamp.now(),
-          });
-        }
-      }
+      // const auth = getAuth();
+      // const db = getFirestore();
+      // const userRef = doc(
+      //   db,
+      //   import.meta.env.PROD ? 'users' : 'dev_users',
+      //   this.user.uid
+      // );
     },
     uploadPhoto() {
       console.log('upload photo');
+    },
+    updateName() {
+      if (this.name) {
+        if (this.name !== this.user.displayName) {
+          this.updateNameValid = true;
+          this.updateNameFeedback = '이름(닉네임)이 변경되었습니다.';
+        } else {
+          this.updateNameValid = false;
+          this.updateNameFeedback = '기존 이름(닉네임)과 동일합니다.';
+        }
+      } else {
+        this.updateNameValid = false;
+        this.updateNameFeedback = '이름(닉네임)을 입력하세요.';
+      }
+    },
+    updateOrgRole() {
+      this.updateOrgValid = true;
+      this.updateOrgFeedback = `오거나이저 역할을 ${
+        this.isOrganizer ? '' : '비'
+      }활성화했습니다.`;
     },
   },
 };
@@ -111,70 +94,96 @@ export default {
         <div class="modal-body">
           <form>
             <div class="mb-3 text-center">
-              <img class="rounded-circle avatar" :src="user.photoURL" />
+              <img class="rounded-circle avatar" :src="user.photo" />
             </div>
             <div class="mb-3">
-              <label for="file" class="form-label">사진:</label>
+              <label for="photo" class="form-label">사진:</label>
               <input
                 class="form-control form-control"
                 type="file"
-                id="file"
+                id="photo"
                 accept="image/"
                 @input="uploadPhoto"
               />
             </div>
             <div class="mb-3">
-              <label class="form-label" for="displayName"
-                >이름 또는 닉네임:</label
+              <label class="form-label" for="name">이름 또는 닉네임:</label>
+              <div
+                class="input-group"
+                :class="
+                  updateNameValid === null
+                    ? null
+                    : updateNameValid
+                    ? 'is-valid'
+                    : 'is-invalid'
+                "
               >
-              <div class="input-group">
                 <input
                   type="text"
                   class="form-control form-control"
-                  id="displayName"
-                  v-model="displayName"
-                  :disabled="canUpdateName === false"
+                  id="name"
+                  v-model="name"
                   required
+                  :class="
+                    updateNameValid === null
+                      ? null
+                      : updateNameValid
+                      ? 'is-valid'
+                      : 'is-invalid'
+                  "
                 />
-                <button type="button" class="btn btn-outline-secondary">
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  @click="updateName"
+                >
                   변경
                 </button>
               </div>
               <div
-                class="form-text text-danger"
-                v-show="canUpdateName === false"
+                :class="
+                  updateNameValid === null
+                    ? null
+                    : updateNameValid
+                    ? 'valid-feedback'
+                    : 'invalid-feedback'
+                "
               >
-                이름(닉네임)을 수정할 수 없습니다.
-              </div>
-              <div class="form-text">
-                이름(닉네임)은 오직 한 번 만 수정할 수 있습니다.
-              </div>
-            </div>
-            <div class="mb-2">
-              <h6 class="form-label">역할</h6>
-              <div class="form-text">
-                역할은 30일 마다 한 번 수정할 수 있습니다.
+                {{ updateNameFeedback }}
               </div>
             </div>
             <div class="mb-3">
+              <h6 class="form-label">역할</h6>
               <div class="form-check form-switch">
                 <input
                   class="form-check-input"
+                  :class="
+                    updateOrgValid === null
+                      ? null
+                      : updateOrgValid
+                      ? 'is-valid'
+                      : 'is-invalid'
+                  "
                   type="checkbox"
                   role="switch"
-                  id="role-organizer"
+                  id="is-organizer"
                   v-model="isOrganizer"
-                  :disabled="canUpdateOrg === false"
+                  @change="updateOrgRole"
                 />
-                <label class="form-check-label" for="role-organizer"
+                <label class="form-check-label" for="is-organizer"
                   >오거나이저</label
                 >
-              </div>
-              <div
-                class="form-text text-danger"
-                v-show="canUpdateOrg === false"
-              >
-                오거나이저 역할을 변경할 수 없습니다.
+                <div
+                  :class="
+                    updateOrgValid === null
+                      ? null
+                      : updateOrgValid
+                      ? 'valid-feedback'
+                      : 'invalid-feedback'
+                  "
+                >
+                  {{ updateOrgFeedback }}
+                </div>
               </div>
               <div class="form-text">
                 오거나이저 역할을 활성화하면, 밀롱가를 생성하고 밀롱가 이벤트를
@@ -183,18 +192,6 @@ export default {
             </div>
           </form>
         </div>
-        <!-- <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
-          >
-            취소
-          </button>
-          <button type="button" class="btn btn-primary" @click="editProfile">
-            수정하기
-          </button>
-        </div> -->
       </div>
     </div>
   </div>

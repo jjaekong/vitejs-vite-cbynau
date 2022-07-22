@@ -18,11 +18,7 @@ export default {
           // [TODO] users에 doc이 있는가? 페이지 이동 : doc 생성 후 페이지 이동
           if (result.user) {
             const db = getFirestore();
-            const userRef = doc(
-              db,
-              import.meta.env.PROD ? 'users' : 'dev_users',
-              result.user.uid
-            );
+            const userRef = doc(db, 'users', result.user.uid);
             const userData = {
               displayName: result.user.displayName,
               photoURL: result.user.photoURL,

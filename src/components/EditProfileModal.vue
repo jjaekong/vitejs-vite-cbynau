@@ -51,11 +51,7 @@ export default {
       })
         .then(() => {
           const db = getFirestore();
-          const userRef = doc(
-            db,
-            import.meta.env.PROD ? 'users' : 'dev_users',
-            this.user.uid
-          );
+          const userRef = doc(db, 'users', this.user.uid);
           setDoc(
             userRef,
             {
@@ -120,6 +116,7 @@ export default {
                 id="name"
                 v-model="name"
                 required
+                autocomplate="no"
               />
             </div>
           </div>

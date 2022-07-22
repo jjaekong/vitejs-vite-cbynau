@@ -196,7 +196,7 @@ export default {
         </li>
       </ul>
     </section>
-    <div>user => {{ user }}</div>
+    <div class="text-break">user => {{ user }}</div>
   </div>
   <component ref="modal" :is="modal" @hideModal="hideModal"></component>
   <!-- <EditProfileModal />

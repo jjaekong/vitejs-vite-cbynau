@@ -9,7 +9,6 @@ export default {
       logo: null,
       name: null,
       id: null,
-      description: null,
       nameValid: null,
       nameFeedback: null,
     };
@@ -47,7 +46,7 @@ export default {
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">새 밀롱가</h5>
+          <h5 class="modal-title">새로운 밀롱가</h5>
           <button
             type="button"
             class="btn-close"
@@ -91,15 +90,6 @@ export default {
                 required
                 autocomplete="no"
               />
-            </div>
-            <div class="mb-3">
-              <label class="form-label" for="description">밀롱가 소개:</label>
-              <textarea
-                class="form-control"
-                id="description"
-                v-model="description"
-                autocomplete="no"
-              ></textarea>
             </div>
           </div>
           <div class="modal-footer">

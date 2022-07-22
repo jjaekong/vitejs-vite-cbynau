@@ -1,6 +1,13 @@
 <script>
 import { store } from '../store';
 import { Modal } from 'bootstrap';
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  Timestamp,
+} from 'firebase/firestore';
 
 export default {
   data() {
@@ -28,8 +35,28 @@ export default {
   },
   methods: {
     uploadLogo() {},
-    newMilonga() {
-      // 밀롱가 ID가 존재 ?
+    async newMilonga() {
+      if (!(this.name && this.id)) return;
+      const db = getFirestore();
+      const milongaRef = doc(db, 'milongas', this.id);
+      const milongaSnap = await getDoc(milongaRef);
+      if (milongaSnap.exists()) {
+        alert('밀롱가 아이디가 이미 존재합니다.');
+      } else {
+        setDoc(milongaRef, {
+          id: this.id,
+          name: this.name,
+          logo: this.logo,
+          createdAt: Timestamp.now(),
+          createdBy: doc(db, 'users', this.user.uid),
+        })
+          .then(() => {
+            alert(
+              '밀롱가가 만들어졌습니다. 이제 밀롱가 이벤트를 등록해 보세요.'
+            );
+          })
+          .catch((error) => {});
+      }
     },
   },
 };
@@ -77,7 +104,7 @@ export default {
                 id="name"
                 v-model="name"
                 required
-                autocomplete="no"
+                autocomplete="off"
               />
             </div>
             <div class="mb-3">
@@ -88,8 +115,13 @@ export default {
                 id="id"
                 v-model="id"
                 required
-                autocomplete="no"
+                autocomplete="off"
+                pattern="[0-9a-z-_]{6,}"
               />
+              <div class="form-text">
+                영문 소문자, 숫자, 대시(-), 언더바(_)를 이용해 6자 이상으로
+                작성해 주세요.
+              </div>
             </div>
           </div>
           <div class="modal-footer">

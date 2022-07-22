@@ -30,10 +30,14 @@ export default {
               .then(() => {
                 this.$router.push('/');
               })
-              .catch((error) => {});
+              .catch((error) => {
+                console.log(error);
+              });
           }
         })
-        .catch((error) => {});
+        .catch((error) => {
+          console.log(error);
+        });
     },
     loginWithFacebook() {},
   },

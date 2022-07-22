@@ -108,7 +108,7 @@ export default {
               class="btn btn-secondary"
               data-bs-dismiss="modal"
             >
-              취소
+              닫기
             </button>
             <button type="submit" class="btn btn-primary">밀롱가 만들기</button>
           </div>

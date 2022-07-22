@@ -1,6 +1,7 @@
 <script>
 import { store } from '../store';
 import { getAuth, updateProfile } from 'firebase/auth';
+import { getFirestore, doc, setDoc } from 'firebase/firestore';
 import { Modal } from 'bootstrap';
 
 export default {
@@ -49,8 +50,28 @@ export default {
         photoURL: this.photo,
       })
         .then(() => {
-          this.store.setUser({ displayName: this.name });
-          alert('프로필이 저장되었습니다.');
+          const db = getFirestore();
+          const userRef = doc(
+            db,
+            import.meta.env.PROD ? 'users' : 'dev_users',
+            this.user.uid
+          );
+          setDoc(
+            userRef,
+            {
+              displayName: this.name,
+              photoURL: this.photo,
+            },
+            { merge: true }
+          )
+            .then(() => {
+              this.store.setUser({
+                displayName: this.name,
+                photoURL: this.photo,
+              });
+              alert('프로필이 저장되었습니다.');
+            })
+            .catch((error) => {});
         })
         .catch((error) => {});
     },
@@ -108,7 +129,7 @@ export default {
               class="btn btn-secondary"
               data-bs-dismiss="modal"
             >
-              취소
+              닫기
             </button>
             <button type="submit" class="btn btn-primary">프로필 저장</button>
           </div>

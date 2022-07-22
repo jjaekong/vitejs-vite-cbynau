@@ -78,7 +78,7 @@ export default {
       class="d-flex align-items-center p-3 position-fixed w-100 top-0"
       style="z-index: 1000; height: 4rem"
     >
-      <h1 class="logo m-0" style="font-size: 1.2rem">LLGG</h1>
+      <h1 class="logo m-0" style="font-size: 1rem">MT</h1>
       <a
         class="settings ms-2 text-dark"
         href="#global-settings"
@@ -106,7 +106,10 @@ export default {
             <i class="bi bi-plus" />
           </button>
           <div class="dropdown-menu shadow">
-            <a class="dropdown-item" href="#new-milonga" data-bs-toggle="modal"
+            <a
+              class="dropdown-item"
+              href="#new-milonga"
+              @click.prevent="showModal('new-milonga-modal')"
               >새로운 밀롱가</a
             >
             <a

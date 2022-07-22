@@ -20,12 +20,10 @@ export default {
           email: user.email,
           emailVerified: user.emailVerified,
           uid: user.uid,
-          isAnonymous: user.isAnonymous,
         });
       } else {
         store.setUser(null);
       }
-      this.$refs['loading'].style.display = 'none';
     });
   },
 };
@@ -40,11 +38,11 @@ export default {
     !PROD
   </div>
   <router-view />
-  <div id="loading" ref="loading">
+  <!-- <div id="loading" ref="loading">
     <div class="spinner-border text-dark" role="status">
       <span class="visually-hidden">Loading...</span>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <style lang="scss">

@@ -22,19 +22,6 @@ export default {
           uid: user.uid,
           isAnonymous: user.isAnonymous,
         });
-        // [TODO] users에 사용자가 있다면 ? 내용을 가져와서 store에 입력
-        const db = getFirestore();
-        const userRef = doc(
-          db,
-          import.meta.env.PROD ? 'users' : 'dev_users',
-          user.uid
-        );
-        const userSnap = await getDoc(userRef);
-        // console.log('userSnap == ', userSnap);
-        if (userSnap.exists()) {
-          const userData = userSnap.data();
-          store.setUser(userData);
-        }
       } else {
         store.setUser(null);
       }

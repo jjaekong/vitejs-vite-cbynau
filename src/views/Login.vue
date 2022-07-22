@@ -15,32 +15,33 @@ export default {
       const auth = getAuth();
       signInWithPopup(auth, provider)
         .then(async (result) => {
+          this.$router.push('/');
           // [TODO] users에 doc이 있는가? 페이지 이동 : doc 생성 후 페이지 이동
-          if (result.user) {
-            const db = getFirestore();
-            const userRef = doc(
-              db,
-              import.meta.env.PROD ? 'users' : 'dev_users',
-              result.user.uid
-            );
-            const userSnap = await getDoc(userRef);
-            if (userSnap.exists()) {
-              this.$router.push('/');
-            } else {
-              const userRoleData = {
-                isOrganizer: false,
-                isDJ: false,
-                isDancer: false,
-                isInstructor: false,
-              };
-              setDoc(userRef, { ...userRoleData }, { merge: true })
-                .then(() => {
-                  store.setUser({ ...userRoleData });
-                  this.$router.push('/');
-                })
-                .catch((error) => {});
-            }
-          }
+          // if (result.user) {
+          //   const db = getFirestore();
+          //   const userRef = doc(
+          //     db,
+          //     import.meta.env.PROD ? 'users' : 'dev_users',
+          //     result.user.uid
+          //   );
+          //   const userSnap = await getDoc(userRef);
+          //   if (userSnap.exists()) {
+          //     this.$router.push('/');
+          //   } else {
+          //     const userRoleData = {
+          //       isOrganizer: false,
+          //       isDJ: false,
+          //       isDancer: false,
+          //       isInstructor: false,
+          //     };
+          //     setDoc(userRef, { ...userRoleData }, { merge: true })
+          //       .then(() => {
+          //         store.setUser({ ...userRoleData });
+          //         this.$router.push('/');
+          //       })
+          //       .catch((error) => {});
+          //   }
+          // }
         })
         .catch((error) => {});
     },

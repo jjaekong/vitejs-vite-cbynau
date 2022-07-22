@@ -1,7 +1,6 @@
 <script>
 import { store } from '../store';
 import { getAuth, signOut } from 'firebase/auth';
-import { Modal } from 'bootstrap';
 
 import EditProfileModal from '../components/EditProfileModal.vue';
 import GlobalSettingsModal from '../components/GlobalSettingsModal.vue';
@@ -20,6 +19,7 @@ export default {
   data() {
     return {
       store,
+      modal: null,
       milongaEvents: [
         {
           city: '홍대',
@@ -60,6 +60,12 @@ export default {
           store.setUser(null);
         })
         .catch((error) => {});
+    },
+    showModal(modal) {
+      this.modal = modal;
+    },
+    hideModal() {
+      this.modal = null;
     },
   },
 };
@@ -133,7 +139,13 @@ export default {
               <div class="email">{{ user.email }}</div>
             </div>
             <hr class="dropdown-divider" />
-            <a class="dropdown-item" href="#edit-profile" data-bs-toggle="modal"
+            <!-- <a class="dropdown-item" href="#edit-profile" data-bs-toggle="modal"
+              >프로필 설정</a
+            > -->
+            <a
+              class="dropdown-item"
+              href="#edit-profile"
+              @click.prevent="showModal('edit-profile-modal')"
               >프로필 설정</a
             >
             <hr class="dropdown-divider" />
@@ -146,18 +158,12 @@ export default {
               <span class="badge text-bg-primary">1</span>
             </a>
             <hr class="dropdown-divider" />
-            <h6 class="dropdown-header" style="font-size: 0.75rem">
-              오거나이저
-            </h6>
             <a class="dropdown-item" href="#edit-profile" data-bs-toggle="modal"
-              >내 밀롱가</a
+              >내가 만든 밀롱가</a
             >
             <a class="dropdown-item" href="#edit-profile" data-bs-toggle="modal"
-              >내 밀롱가 이벤트</a
+              >내가 만든 밀롱가 이벤트</a
             >
-            <!-- <p class="px-3 text-muted small">
-              프로필 설정에서 오거나이저 역할을 선택하면 관련 메뉴가 노출됩니다.
-            </p> -->
             <hr class="dropdown-divider" />
             <a class="dropdown-item text-danger" href="#" @click="logout"
               >로그아웃</a
@@ -189,10 +195,11 @@ export default {
     </section>
     <div>user => {{ user }}</div>
   </div>
-  <EditProfileModal />
+  <component ref="modal" :is="modal" @hideModal="hideModal"></component>
+  <!-- <EditProfileModal />
   <GlobalSettingsModal />
   <NewMilongaModal />
-  <NewMilongaEventModal />
+  <NewMilongaEventModal /> -->
 </template>
 
 <style scoped lang="scss">
